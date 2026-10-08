@@ -20,6 +20,7 @@ Counterexamples to the network coding conjecture for undirected graphs: instance
 - [`scripts/cut-slack-32.py`](scripts/cut-slack-32.py) — standard-library cut-slack analysis of the 32-vertex graph, and the 31-vertex merged graph on which coding and routing tie.
 - [`scripts/verify-network-coding-33.py`](scripts/verify-network-coding-33.py) — standard-library exact checker for the 33-vertex code and routing bound.
 - [`writeup/`](writeup) — the LaTeX writeup, its PDF, and `gen_full_graph.py`, which draws the full-network figure from the checker's edge table.
+- [`lean/`](lean) — a Lean 4 + Mathlib formalization of the 33-vertex counterexample, with no `sorry`. Its final theorem, `NetCoding.not_undirectedMultipleUnicastConjecture` in [`Main.lean`](lean/NetworkCoding33/Main.lean), refutes the conjecture with the entropy-based coding rate of Braverman–Garg–Schvartzman (Definition A.3). Along the way it proves that the XOR code achieves rate 1, that routing is at most 149/150 (by weak LP duality with distance potentials), and that the coding rate is exactly 1 (by the cut bound). All finite facts about the instance are checked by the kernel with `decide +kernel`; no `native_decide` is used.
 
 ## Running
 
@@ -27,6 +28,12 @@ Counterexamples to the network coding conjecture for undirected graphs: instance
 python3 scripts/verify-network-coding-32.py
 python3 scripts/cut-slack-32.py --merged
 python3 scripts/verify-network-coding-33.py
+```
+
+To check the Lean proof (Lean toolchain `v4.33.1`, installed automatically by [elan](https://github.com/leanprover/elan)):
+
+```bash
+cd lean && lake exe cache get && lake build
 ```
 
 ## Implications

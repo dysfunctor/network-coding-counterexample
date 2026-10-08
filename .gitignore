@@ -4,7 +4,7 @@ __pycache__/
 .venv/
 venv/
 .ipynb_checkpoints/
-lean/
+.lake/
 *.aux
 *.log
 *.out
